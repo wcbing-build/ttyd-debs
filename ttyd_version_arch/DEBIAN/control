@@ -1,0 +1,9 @@
+Package: ttyd
+Version: version
+Architecture: arch
+Maintainer: wcbing <i@wcbing.top>
+Section: web
+Priority: optional
+Homepage: https://tsl0922.github.io/ttyd
+Description:  Share your terminal over the web
+ ttyd is a command-line tool for sharing a terminal over the web.

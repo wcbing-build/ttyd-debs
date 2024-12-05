@@ -1,0 +1,31 @@
+name: build and release
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '0 0 1 * *'
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build
+      run: ./run.sh
+
+    - name: Get Version
+      run: echo "tag=$(cat tag)" >> $GITHUB_ENV
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: env.tag != '0'
+      with:
+        tag_name: ${{ env.tag }}
+        files: |
+          *.deb
+          Packages
+          Release
