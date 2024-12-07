@@ -4,14 +4,14 @@ REPO="tsl0922/ttyd"
 LOCAL_REPO="wcbing/ttyd-debs"
 
 get_github_latest_tag() {
-    curl -sI "https://github.com/$REPO/releases/latest" | grep location |
+    curl -sI "https://github.com/$1/releases/latest" | grep "releases/tag" |
         sed -E 's#.*/releases/tag/[vV]*([^_\r]*).*#\1#'
 }
 
 LOCAL_VERSION=$(get_github_latest_tag "$LOCAL_REPO")
 if [ -z "$LOCAL_VERSION" ]; then
     echo "Error: Can't get version tag from $LOCAL_REPO."
-    LOCAL_VERSION = "0"
+    LOCAL_VERSION="0"
 fi
 
 VERSION=$(get_github_latest_tag "$REPO")
