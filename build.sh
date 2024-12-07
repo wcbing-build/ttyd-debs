@@ -17,7 +17,7 @@ get_url_by_arch() {
 }
 
 build() {
-    BASE_DIR="$PACKAGE"_"$VERSION"_"$1"
+    BASE_DIR="$PACKAGE"_"$VERSION"-1_"$1"
     cp -r "$PACKAGE"_version_arch "$BASE_DIR"
     sed -i "s/Architecture: arch/Architecture: $1/" "$BASE_DIR/DEBIAN/control"
     sed -i "s/Version: version/Version: $VERSION-1/" "$BASE_DIR/DEBIAN/control"

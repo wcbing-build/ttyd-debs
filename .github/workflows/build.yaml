@@ -27,7 +27,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       if: ${{ env.tag != '0' }}
       with:
-        tag_name: ${{ env.tag }}
+        tag_name: v${{ env.tag }}
         files: |
           *.deb
           Packages
