@@ -17,12 +17,16 @@ get_url_by_arch() {
 }
 
 build() {
+    # Prepare
     BASE_DIR="$PACKAGE"_"$VERSION"-1_"$1"
-    cp -r "$PACKAGE"_version_arch "$BASE_DIR"
+    rm -rf "$BASE_DIR"
+    cp -r templates "$BASE_DIR"
     sed -i "s/Architecture: arch/Architecture: $1/" "$BASE_DIR/DEBIAN/control"
     sed -i "s/Version: version/Version: $VERSION-1/" "$BASE_DIR/DEBIAN/control"
+    # Download and move file
     curl -sLo "$BASE_DIR/usr/bin/$PACKAGE" "$(get_url_by_arch $1)"
     chmod 755 "$BASE_DIR/usr/bin/$PACKAGE"
+    # Build
     dpkg-deb --build --root-owner-group "$BASE_DIR"
 }
 
