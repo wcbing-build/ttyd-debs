@@ -3,9 +3,9 @@ name: build and release
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
-    - cron:  '0 0 1 * *'
+    - cron:  '0 1 * * *'
 
 jobs:
   build-release:
