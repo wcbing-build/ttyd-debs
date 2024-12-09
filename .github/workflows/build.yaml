@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron:  '0 1 * * *'
+    - cron: '0 1 * * *'
 
 jobs:
   build-release:
@@ -14,17 +14,20 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Build
-      run: ./run.sh
-
     - name: Get Version
-      run: echo "tag=$(cat tag)" >> $GITHUB_ENV
+      run: |
+        ./check.sh
+        echo "tag=$(cat tag)" >> $GITHUB_ENV
+
+    - name: Build
+      if: ${{ env.tag != '0' }}
+      run: ./build.sh
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      if: env.tag != '0'
+      if: ${{ env.tag != '0' }}
       with:
-        tag_name: ${{ env.tag }}
+        tag_name: v${{ env.tag }}
         files: |
           *.deb
           Packages
