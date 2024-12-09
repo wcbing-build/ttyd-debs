@@ -1,7 +1,7 @@
 #!/bin/sh
 
 REPO="tsl0922/ttyd"
-LOCAL_REPO="wcbing/ttyd-debs"
+LOCAL_REPO="wcbing-build/ttyd-debs"
 
 get_github_latest_tag() {
     curl -sI "https://github.com/$1/releases/latest" | grep "releases/tag" |
